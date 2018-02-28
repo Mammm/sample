@@ -28,4 +28,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    const GRAVATAR_URL = 'www.gravatar.com';
+
+    public function avatar(int $size = 140)
+    {
+        $hash = md5(strtolower(trim($this->attributes['email'])));
+        return 'http://'.self::GRAVATAR_URL.'/avatar/'.$hash.'?s='.$size;
+    }
 }
